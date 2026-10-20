@@ -86,11 +86,7 @@ $env:POSTGRES_PASSWORD="password"
 .\gradlew.bat bootRun --args="--spring.profiles.active=postgres"
 ```
 
-Примечания:
-- Docker Compose (`docker compose up -d`) работает на Windows одинаково (WSL2/Docker Desktop).
-- curl в Windows (PowerShell): для однотипных запросов удобнее Swagger UI: http://localhost:8080/swagger-ui.html
-
-| Что | URL |
+| | URL |
 |-----|-----|
 | Swagger UI | http://localhost:8080/swagger-ui/index.html |
 | OpenAPI JSON | http://localhost:8080/v3/api-docs |
