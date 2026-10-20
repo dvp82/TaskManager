@@ -15,22 +15,11 @@ RESTful-сервис управления задачами на **Spring Boot 2.
 
 Приложение поднимется на `http://localhost:8080`.
 
-### База данных на выбор: H2 или PostgreSQL
+### Выбор базы данных: H2 или PostgreSQL
 
-По умолчанию используется **H2** (in-memory, данные сбрасываются при остановке). Переключение на **PostgreSQL** — через Spring-профиль.
+По умолчанию используется **H2** (in-memory, данные сбрасываются при остановке). Переключение на **PostgreSQL** — через Spring-профиль `postgres`.
 
-```bash
-# H2 (по умолчанию)
-./gradlew bootRun
-
-# PostgreSQL
-docker compose up -d
-./gradlew bootRun --args='--spring.profiles.active=postgres'
-```
-
-### PostgreSQL через Docker (docker-compose)
-
-В репозитории есть `docker-compose.yml` — поднимает Postgres под значения по умолчанию:
+PostgreSQL поднимается через Docker (`docker-compose.yml`):
 
 ```bash
 docker compose up -d        # старт БД
@@ -39,13 +28,7 @@ docker compose down         # остановить (данные в volume со�
 docker compose down -v      # остановить и удалить данные
 ```
 
-Запуск приложения на Postgres:
-
-```bash
-./gradlew bootRun --args='--spring.profiles.active=postgres'
-```
-
-Параметры PostgreSQL настраиваются через переменные окружения (есть значения по умолчанию):
+Параметры PostgreSQL настраиваются через переменные окружения (значения по умолчанию):
 
 | Переменная | По умолчанию |
 |------------|--------------|
@@ -53,15 +36,27 @@ docker compose down -v      # остановить и удалить данны�
 | `POSTGRES_USER` | `postgres` |
 | `POSTGRES_PASSWORD` | `password` |
 
+- H2: `spring.jpa.hibernate.ddl-auto=create-drop` (таблицы создаются/удаляются, H2 Console включена).
+- PostgreSQL: `ddl-auto=update` (таблицы создаются при первом запуске, данные сохраняются между запусками).
+
+### Запуск на macOS/Linux (*nix)
+
+```bash
+# H2 (по умолчанию)
+./gradlew bootRun
+
+# PostgreSQL (БД предварительно поднята: docker compose up -d)
+./gradlew bootRun --args='--spring.profiles.active=postgres'
+```
+
+Задать переменные окружения для Postgres:
+
 ```bash
 POSTGRES_URL=jdbc:postgresql://localhost:5432/taskdb \
 POSTGRES_USER=app \
 POSTGRES_PASSWORD=secret \
 ./gradlew bootRun --args='--spring.profiles.active=postgres'
 ```
-
-- H2: `spring.jpa.hibernate.ddl-auto=create-drop` (таблицы создаются/удаляются, H2 Console включена).
-- PostgreSQL: `ddl-auto=update` (таблицы создаются при первом запуске, данные сохраняются между запусками).
 
 ### Запуск на Windows
 
