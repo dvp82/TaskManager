@@ -1,10 +1,10 @@
 # Task Manager
 
-RESTful-сервис управления задачами на **Spring Boot 2.7** (совместим с **Java 11**) с аутентификацией по **JWT**, ролями `USER`/`ADMIN`, хранением паролей через **BCrypt**, базой **H2**, документацией **Swagger/OpenAPI** и тестами **JUnit 5 + Mockito**.
+RESTful-сервис управления задачами на **Spring Boot 2.7** (совместим с **Java 11+**) с аутентификацией по **JWT**, ролями `USER`/`ADMIN`, хранением паролей через **BCrypt**, базой **H2**, документацией **Swagger/OpenAPI** и тестами **JUnit 5 + Mockito**.
 
 ## Стек
 
-- Java 11, Spring Boot 2.7.18, Gradle 8.10.2
+- **Java 11+** (сборка под Java 11, работает и на новых версиях), Spring Boot 2.7.18, Gradle 8.10.2
 - Spring Web, Spring Data JPA (Hibernate 5.6)
 - Spring Security 5.7 + JWT (jjwt 0.12.6)
 - H2 (in-memory), Lombok
