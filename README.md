@@ -63,6 +63,38 @@ POSTGRES_PASSWORD=secret \
 - H2: `spring.jpa.hibernate.ddl-auto=create-drop` (таблицы создаются/удаляются, H2 Console включена).
 - PostgreSQL: `ddl-auto=update` (таблицы создаются при первом запуске, данные сохраняются между запусками).
 
+### Запуск на Windows
+
+Вместо `./gradlew` используется `gradlew.bat` (он есть в репозитории).
+
+```bat
+:: Windows (Command Prompt)
+gradlew.bat bootRun
+
+:: с профилем PostgreSQL
+gradlew.bat bootRun --args="--spring.profiles.active=postgres"
+```
+
+PowerShell:
+
+```powershell
+.\gradlew.bat bootRun
+.\gradlew.bat bootRun --args="--spring.profiles.active=postgres"
+```
+
+Задать переменные окружения для Postgres в PowerShell:
+
+```powershell
+$env:POSTGRES_URL="jdbc:postgresql://localhost:5432/taskmanager"
+$env:POSTGRES_USER="postgres"
+$env:POSTGRES_PASSWORD="password"
+.\gradlew.bat bootRun --args="--spring.profiles.active=postgres"
+```
+
+Примечания:
+- Docker Compose (`docker compose up -d`) работает на Windows одинаково (WSL2/Docker Desktop).
+- curl в Windows (PowerShell): для однотипных запросов удобнее Swagger UI: http://localhost:8080/swagger-ui.html
+
 | Что | URL |
 |-----|-----|
 | Swagger UI | http://localhost:8080/swagger-ui/index.html |
